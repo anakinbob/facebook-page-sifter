@@ -3,5 +3,11 @@
   "file_path": "D:\\Documents",
   "file_name": "out.txt",
   "group_id": "142679255268",
-  "earliest_date": "2016-11-20"
+  "earliest_date": "2016-11-20",
+  "search_params_pos": [
+    "3/", " 3 room", "lester"
+  ],
+  "search_params_neg": [
+    "female"
+  ]
 }

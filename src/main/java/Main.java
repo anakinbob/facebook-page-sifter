@@ -19,7 +19,8 @@ public class Main {
     private static String baseUrl = "https://graph.facebook.com/v2.8/{groupId}/feed";
     private static String auth;
     private static final String earliestDateString = "2016-11-20";
-
+    private static JSONArray searchParamsPos;
+    private static JSONArray searchParamsNeg;
     public static void main(String[] args) {
         loadParams();
         writeResponse();
@@ -45,6 +46,8 @@ public class Main {
             ROOT =  jsonObject.getString("file_path");
             FILE_NAME = jsonObject.getString("file_name");
             baseUrl = baseUrl.replace("{groupId}",jsonObject.getString("group_id"));
+            searchParamsPos = jsonObject.getJSONArray("search_params_pos");
+            searchParamsPos = jsonObject.getJSONArray("search_params_neg");
         } catch (IOException | NullPointerException e) {
             throw new RuntimeException("File params.json not found in resources, please add");
         }
@@ -154,18 +157,17 @@ public class Main {
 
     private static boolean include(String string) {
         String message = string.toLowerCase();
-        if(!(message.contains("3/") || message.contains(" 3 room"))) { //looking for 3 rooms
-            return false;
+        for(Object s : searchParamsPos) {
+            if(!message.contains(s.toString())) {
+                return false;
+            }
         }
 
-        if(message.contains("female")) { //filters posts that say females only
-            return false;
+        for(Object s : searchParamsNeg) {
+            if(message.contains(s.toString())) {
+                return false;
+            }
         }
-
-        if(!(message.contains("philip") || message.contains("lester") || message.contains("sunview") || message.contains("albert") || message.contains("hemlock"))) { //looking for places around these areas
-            return false;
-        }
-
         return true;
     }
 
