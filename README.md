@@ -8,3 +8,5 @@ This is an app that can sift through the posts on a facebook page/group and filt
 4. Replace the group_id value with one for a page/group you want. To find it simply insert it in a facebook ID finder website such as this: http://findfacebookid.com/
 5. Make sure to replace earliest_date with the earliest date you want posts to be included. Format is yyyy-mm-dd
 6. Change other params as necessary and run the project
+7. The parameter "search_param_pos" is an array of strings for things that must be included in the post for the post to be included
+8. The parameter "search_param_neg" is an array of strings for which if any are included in the post, the post will not be included
