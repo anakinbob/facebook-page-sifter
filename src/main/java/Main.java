@@ -18,7 +18,7 @@ public class Main {
     private static String FILE_NAME;
     private static String baseUrl = "https://graph.facebook.com/v2.8/{groupId}/feed";
     private static String auth;
-    private static final String earliestDateString = "2016-11-20";
+    private static final String earliestDateString = "2017-10-01";
     private static JSONArray searchParamsPos;
     private static JSONArray searchParamsNeg;
     public static void main(String[] args) {
@@ -47,7 +47,7 @@ public class Main {
             FILE_NAME = jsonObject.getString("file_name");
             baseUrl = baseUrl.replace("{groupId}",jsonObject.getString("group_id"));
             searchParamsPos = jsonObject.getJSONArray("search_params_pos");
-            searchParamsPos = jsonObject.getJSONArray("search_params_neg");
+            searchParamsNeg = jsonObject.getJSONArray("search_params_neg");
         } catch (IOException | NullPointerException e) {
             throw new RuntimeException("File params.json not found in resources, please add");
         }
@@ -157,18 +157,20 @@ public class Main {
 
     private static boolean include(String string) {
         String message = string.toLowerCase();
-        for(Object s : searchParamsPos) {
-            if(!message.contains(s.toString())) {
-                return false;
-            }
-        }
 
         for(Object s : searchParamsNeg) {
             if(message.contains(s.toString())) {
                 return false;
             }
         }
-        return true;
+
+        for(Object s : searchParamsPos) {
+            if(message.contains(s.toString())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static class FBResponse {

@@ -2,12 +2,12 @@
   "auth_token": "INSERT_AUTH_TOKEN_HERE",
   "file_path": "D:\\Documents",
   "file_name": "out.txt",
-  "group_id": "142679255268",
-  "earliest_date": "2016-11-20",
+  "group_id": "945920215452910",
+  "earliest_date": "2017-10-01",
   "search_params_pos": [
-    "3/", " 3 room", "lester"
+    "palo", "mountain", "alto"
   ],
   "search_params_neg": [
-    "female"
+
   ]
 }
